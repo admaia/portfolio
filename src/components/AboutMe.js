@@ -12,6 +12,7 @@ const AboutWrapper = styled.section`
     opacity: 0;
     transform: translateX(20px); 
     transition: opacity 1s ease, transform 1s ease;
+    margin-bottom: 200px;
     &.fade-in-visible {
         opacity: 1;
         transform: translateX(0);

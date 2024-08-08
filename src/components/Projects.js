@@ -9,6 +9,7 @@ const ProjectsWrapper = styled.section`
     opacity: 0;
     transform: translateX(-20px); 
     transition: opacity 1s ease, transform 1s ease;
+    margin-bottom: 200px;
     &.fade-in-visible {
         opacity: 1;
         transform: translateX(0); 
@@ -28,7 +29,7 @@ const ProjectCard = styled.div`
     margin-bottom: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
-        transform: translateY(-10px);
+        transform: translateX(-10px);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 `;

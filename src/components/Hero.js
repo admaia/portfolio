@@ -22,7 +22,7 @@ const HeroWrapper = styled.section`
     justify-content: center;
     text-align: center;
     position: relative;
-    overflow: hidden;
+    margin-bottom: 150px;
 `;
 
 const HeroContent = styled.div`
@@ -101,7 +101,7 @@ const EmojiCircleWrapper = styled.div`
     justify-content: center;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border: 5px solid ${(props) => props.theme.textColor};
+    border: 5px solid #eee2df;
     z-index: 1;
     &:hover .emoji {
         transform: scale(1.2);
@@ -110,7 +110,7 @@ const EmojiCircleWrapper = styled.div`
         font-size: 10em;
         transition: transform 0.3s ease;
         position: relative;
-        top: 12%;
+        top: 13%;
         right: 3px;
         @media (max-width: 768px) {
             font-size: 10em;
@@ -130,7 +130,7 @@ const HeroSection = ({ toggleDarkMode }) => (
         <LightBulb onClick={toggleDarkMode}>💡</LightBulb>
         <HeroWrapper className="hero-section">
             <HeroContent>
-                <HeroTitle>Welcome to My Portfolio ✨</HeroTitle>
+                <HeroTitle>Welcome to my <span className='portfolio'>Portfolio</span> ✨</HeroTitle>
                 <HeroSubtitle>
                     Hi, I'm Adama Aïssa. I aim to create engaging web experiences with a focus on both aesthetics and performance.
                 </HeroSubtitle>

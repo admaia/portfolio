@@ -7,6 +7,7 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         height: 100%; 
+        transition : 1s all;
     }
     body {
         position: relative;
@@ -141,6 +142,19 @@ const GlobalStyles = createGlobalStyle`
     .hero-section {
         opacity: 1 !important;
         transform: translateY(0) !important;
+    }
+    .portfolio {
+        transform: translate(-50%,-50%);
+        background-image: linear-gradient(#eee2df, #eee2df);
+        background-size: 100% 10px;
+        background-repeat: no-repeat;
+        background-position: 0 110%;
+        transition: background-size .7s, background-position .5s ease-in-out;
+    }
+    .portfolio:hover {
+        background-size: 100% 100%;
+        background-position: 0% 100%;
+        transition: background-position .7s, background-size .5s ease-in-out;
     }
 
     @keyframes fadeIn {
