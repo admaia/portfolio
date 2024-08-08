@@ -4,44 +4,43 @@ import project from '../images/project.png';
 import projectDark from '../images/project-dark-mode.png';
 
 const ProjectsWrapper = styled.section`
-    padding: 60px 20px;
+    padding: 3.75rem 1.25rem;
     text-align: center;
     opacity: 0;
-    transform: translateX(-20px); 
+    transform: translateX(-1.25rem);
     transition: opacity 1s ease, transform 1s ease;
-    margin-bottom: 200px;
+    margin-bottom: 12.5rem;
     &.fade-in-visible {
         opacity: 1;
-        transform: translateX(0); 
+        transform: translateX(0);
     }
 `;
 
 const ProjectContainer = styled.div`
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 0 auto;
 `;
 
 const ProjectCard = styled.div`
     background: ${(props) => props.theme.cardBackground};
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    border-radius: 0.75rem; 
+    padding: 1.25rem; 
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.25rem; 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
-        transform: translateX(-10px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transform: translateX(-0.625rem); 
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); 
     }
 `;
 
 const ProjectTitle = styled.h2`
-    font-family: "Lato", sans-serif;
     font-family: "Abril Fatface", serif;
     font-size: 1.8rem;
     color: ${(props) => props.theme.cardTitleColor};
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem; 
     text-align: center;
-    @media (max-width: 768px) {
+    @media (max-width: 48rem) { 
         font-size: 1.5rem;
     }
 `;
@@ -49,6 +48,7 @@ const ProjectTitle = styled.h2`
 const ProjectsSection = ({ theme }) => {
     const section = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
+
     useEffect(() => {
         const observer = new IntersectionObserver(([para]) => {
             setIsVisible(para.isIntersecting);
@@ -65,6 +65,7 @@ const ProjectsSection = ({ theme }) => {
         };
     }, []);
     const isDarkMode = theme === 'dark';
+    
     return (
         <ProjectsWrapper ref={section} className={isVisible ? 'fade-in-visible' : 'fade-in'}>
             <ProjectContainer>
