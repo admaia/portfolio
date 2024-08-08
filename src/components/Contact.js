@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import emailLogo from '../images/emailLogo.png';
 import linkedinLogo from '../images/linkedinLogo.png';
@@ -6,6 +6,13 @@ import linkedinLogo from '../images/linkedinLogo.png';
 const ContactWrapper = styled.section`
     padding: 60px 20px;
     text-align: center;
+    opacity: 0;
+    transform: translateX(20px); 
+    transition: opacity 1s ease, transform 1s ease;
+    &.fade-in-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
 `;
 
 const ContactContent = styled.div`
@@ -47,20 +54,39 @@ const ContactLinks = styled.p`
     }
 `;
 
-const ContactSection = () => (
-    <ContactWrapper>
-        <ContactContent>
-            <ContactTitle>Contact Me</ContactTitle>
-            <ContactLinks>
-                <a href="mailto:adamaaissamaigadesign@gmail.com">
-                    <img src={emailLogo} alt='Email Logo' />
-                </a>
-                <a href="https://www.linkedin.com/in/adama-a%C3%AFssa-ma%C3%AFga-b726312aa/">
-                    <img src={linkedinLogo} alt='LinkedIn Logo' />
-                </a>
-            </ContactLinks>
-        </ContactContent>
-    </ContactWrapper>
-);
+const ContactSection = () => {
+    const sectionRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            setIsVisible(entry.isIntersecting);
+        }, {
+            threshold: 0.1
+        });
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, []);
+    return (
+        <ContactWrapper ref={sectionRef} className={isVisible ? 'fade-in-visible' : 'fade-in'}>
+            <ContactContent>
+                <ContactTitle>Contact Me</ContactTitle>
+                <ContactLinks>
+                    <a href="mailto:adamaaissamaigadesign@gmail.com">
+                        <img src={emailLogo} alt='Email Logo' />
+                    </a>
+                    <a href="https://www.linkedin.com/in/adama-a%C3%AFssa-ma%C3%AFga-b726312aa/">
+                        <img src={linkedinLogo} alt='LinkedIn Logo' />
+                    </a>
+                </ContactLinks>
+            </ContactContent>
+        </ContactWrapper>
+    );
+};
 
 export default ContactSection;

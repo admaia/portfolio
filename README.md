@@ -21,8 +21,9 @@ As I worked on the project, I realized I wouldn't have enough time to finish the
 Here’s what I focused on for the final design:
 
 - **Responsive Layout**: The website adjusts to different screen sizes, including phones and tablets.
-- **Theme Switching**: Added a feature to switch between light and dark themes.
-- **Background**: Used a vector image as a repeating background with some opacity to make the design more interesting.
+- **Theme Switching**: I added a feature to switch between light and dark themes.
+- **Background**: I used a vector image as a repeating background with some opacity to make the design more interesting.
+- **Various animations**: I added various animations to make the website more engaging and fun as it is a very simple layout.
 
 ## Technical Details
 
@@ -44,6 +45,79 @@ I used React's `useState` hook to manage the theme switching functionality. This
 
 ## Code Highlights
 
+### Sections Fade-In Animation
+
+To enhance the visual appeal, I implemented a fade-in animation for sections as they become visible on the screen : 
+
+- **Global & personalized styles**: I applied a general fade-in effect to all sections. I then gave each section a custom fade-in style.
+
+```css
+section {
+    box-sizing: border-box;
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px); 
+}
+
+.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+const AboutWrapper = styled.section`
+    padding: 60px 20px;
+    text-align: center;
+    opacity: 0;
+    transform: translateX(20px); 
+    transition: opacity 1s ease, transform 1s ease;
+    &.fade-in-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+`;
+
+const ProjectsWrapper = styled.section`
+    padding: 60px 20px;
+    text-align: center;
+    opacity: 0;
+    transform: translateX(-20px); 
+    transition: opacity 1s ease, transform 1s ease;
+    &.fade-in-visible {
+        opacity: 1;
+        transform: translateX(0); 
+    }
+`;
+
+const ContactWrapper = styled.section`
+    padding: 60px 20px;
+    text-align: center;
+    opacity: 0;
+    transform: translateX(20px); 
+    transition: opacity 1s ease, transform 1s ease;
+    &.fade-in-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+`;
+```
+
+### Hero Section Customization
+
+To ensure the hero section is not affected by the fade-in animation, I added a specific class hero-section to override the fade-in for this section.
+
+```javascript
+.hero-section {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+```
+
 ### Scroll Prompt with Shadow
 
 I added a shadow to the "Scroll to explore" text to make it more visible. The shadow color changes based on the theme:
@@ -52,3 +126,4 @@ I added a shadow to the "Scroll to explore" text to make it more visible. The sh
 text-shadow: ${(props) =>
     props.theme.bodyBackground === '#eee2df' ? `1px 1px 2px #c89f9c` : `1px 1px 2px black` 
 };
+```

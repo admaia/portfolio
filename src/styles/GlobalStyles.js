@@ -1,8 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
-import vector from '../images/vector.png'
+import vector from '../images/vector.png';
 
 const GlobalStyles = createGlobalStyle`
-        html, body {
+    html, body {
         scroll-behavior: smooth;
         margin: 0;
         padding: 0;
@@ -14,7 +14,6 @@ const GlobalStyles = createGlobalStyle`
         overflow-x: hidden;
         background-color: ${(props) => props.theme.bodyBackground};
     }
-
     body::before {
         content: "";
         position: fixed; 
@@ -42,6 +41,9 @@ const GlobalStyles = createGlobalStyle`
     section {
         box-sizing: border-box;
         padding: 20px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s ease, transform 1s ease;
     }
     a {
         padding: 15px;
@@ -128,27 +130,44 @@ const GlobalStyles = createGlobalStyle`
         color: white;
         margin: 0;
     }
+    .fade-in {
+        opacity: 0;
+        transform: translateX(20px); 
+    }
+    .fade-in-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    .hero-section {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
     @keyframes fadeIn {
         from {
             opacity: 0;
+            transform: translateY(20px); 
         }
         to {
             opacity: 1;
+            transform: translateY(0);
         }
     }
+
     @media (max-width: 768px) {
         .project-wrapper {
-        flex-direction: column;
-        align-items: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        .project-container {
+            max-width: 100%;
+            margin: 10px 0;
+        }
+        .project-title {
+            font-size: 1.2rem;
+        }
     }
-    .project-container {
-        max-width: 100%;
-        margin: 10px 0;
-    }
-    .project-title {
-        font-size: 1.2rem;
-    }
-    }
+
     @media (max-width: 480px) {
         body {
             font-size: 12px;

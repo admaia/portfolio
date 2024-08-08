@@ -6,6 +6,8 @@ const LightBulb = styled.section`
     max-height: 100px;
     font-size: 2rem;
     cursor: pointer;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
     @media (max-width: 768px) {
         font-size: 1.5rem;
         max-width: 80px;
@@ -126,7 +128,7 @@ const EmojiCircleWrapper = styled.div`
 const HeroSection = ({ toggleDarkMode }) => (
     <>
         <LightBulb onClick={toggleDarkMode}>💡</LightBulb>
-        <HeroWrapper>
+        <HeroWrapper className="hero-section">
             <HeroContent>
                 <HeroTitle>Welcome to My Portfolio ✨</HeroTitle>
                 <HeroSubtitle>

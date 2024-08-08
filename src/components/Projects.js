@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import project from '../images/project.png';
-import projectDark from '../images/project-dark-mode.png'
-
+import projectDark from '../images/project-dark-mode.png';
 
 const ProjectsWrapper = styled.section`
     padding: 60px 20px;
     text-align: center;
+    opacity: 0;
+    transform: translateX(-20px); 
+    transition: opacity 1s ease, transform 1s ease;
+    &.fade-in-visible {
+        opacity: 1;
+        transform: translateX(0); 
+    }
 `;
 
 const ProjectContainer = styled.div`
@@ -40,27 +46,49 @@ const ProjectTitle = styled.h2`
 `;
 
 const ProjectsSection = ({ theme }) => {
+    const section = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+    useEffect(() => {
+        const observer = new IntersectionObserver(([para]) => {
+            setIsVisible(para.isIntersecting);
+        }, {
+            threshold: 0.1
+        });
+        if (section.current) {
+            observer.observe(section.current);
+        }
+        return () => {
+            if (section.current) {
+                observer.unobserve(section.current);
+            }
+        };
+    }, []);
     const isDarkMode = theme === 'dark';
-    return(
-        <ProjectsWrapper>
+    return (
+        <ProjectsWrapper ref={section} className={isVisible ? 'fade-in-visible' : 'fade-in'}>
             <ProjectContainer>
                 <ProjectCard>
                     <ProjectTitle>Projects</ProjectTitle>
                     <div className='project-wrapper'>
                         <div className='mouse-wrapper'>
-                            <img className = {isDarkMode ? 'project-dark-mode': 'project'} src = {isDarkMode ? projectDark : project} alt='Project Preview' />
+                            <img 
+                                className={isDarkMode ? 'project-dark-mode' : 'project'} 
+                                src={isDarkMode ? projectDark : project} 
+                                alt='Project Preview' 
+                            />
                             <h3 className='project-title'>Mini Mouse Game</h3>
                         </div>
-                        <div className = {isDarkMode ? 'project-container-dark': 'project-container'}>
-                            <p className= {isDarkMode ? 'project-text-dark': 'project-text'}>More to come...</p>
+                        <div className={isDarkMode ? 'project-container-dark' : 'project-container'}>
+                            <p className={isDarkMode ? 'project-text-dark' : 'project-text'}>More to come...</p>
                         </div>
-                        <div className = {isDarkMode ? 'project-container-dark': 'project-container'}>
-                            <p className= {isDarkMode ? 'project-text-dark': 'project-text'}>More to come...</p>
+                        <div className={isDarkMode ? 'project-container-dark' : 'project-container'}>
+                            <p className={isDarkMode ? 'project-text-dark' : 'project-text'}>More to come...</p>
                         </div>
                     </div>
                 </ProjectCard>
             </ProjectContainer>
         </ProjectsWrapper>
-    )
+    );
 };
+
 export default ProjectsSection;
