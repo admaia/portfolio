@@ -1,16 +1,43 @@
 import { createGlobalStyle } from 'styled-components';
+import vector from '../images/vector.png'
 
 const GlobalStyles = createGlobalStyle`
-    html {
+        html, body {
         scroll-behavior: smooth;
         margin: 0;
         padding: 0;
+        height: 100%; 
     }
     body {
-        background: ${(props) => props.theme.bodyBackground};
-        margin: 0;
+        position: relative;
         font-family: 'Arial', sans-serif;
-        color: #333;
+        overflow-x: hidden;
+        background-color: ${(props) => props.theme.bodyBackground};
+    }
+
+    body::before {
+        content: "";
+        position: fixed; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(${vector});
+        background-repeat: repeat;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.1; 
+        z-index: -1;
+    }
+    body::after {
+        content: "";
+        position: fixed; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.05); 
+        z-index: -1; 
     }
     section {
         box-sizing: border-box;

@@ -69,6 +69,9 @@ const ScrollPrompt = styled.p`
     top: 150%;
     left: 42%;
     animation: slide 5s infinite linear;
+    text-shadow: ${(props) =>
+        props.theme.bodyBackground === '#eee2df' ? `1px 1px 2px #c89f9c` : `1px 1px 2px black` 
+    };
     @keyframes slide {
         0% { transform: translateY(0); }
         50% { transform: translateY(-10px); }
